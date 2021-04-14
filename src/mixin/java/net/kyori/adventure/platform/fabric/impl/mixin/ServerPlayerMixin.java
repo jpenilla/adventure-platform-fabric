@@ -33,7 +33,6 @@ import net.kyori.adventure.audience.ForwardingAudience;
 import net.kyori.adventure.platform.fabric.FabricServerAudiences;
 import net.kyori.adventure.platform.fabric.impl.LocaleHolderBridge;
 import net.kyori.adventure.platform.fabric.PlayerLocales;
-import net.kyori.adventure.platform.fabric.impl.accessor.ClientboundTabListPacketAccess;
 import net.kyori.adventure.platform.fabric.impl.accessor.ServerboundClientInformationPacketAccess;
 import net.kyori.adventure.platform.fabric.impl.server.FabricServerAudiencesImpl;
 import net.kyori.adventure.platform.fabric.impl.server.RenderableAudience;
@@ -104,9 +103,7 @@ public abstract class ServerPlayerMixin extends Player implements ForwardingAudi
     if(footer != null) {
       this.adventure$tabListFooter = footer;
     }
-    final ClientboundTabListPacket packet = new ClientboundTabListPacket();
-    ((ClientboundTabListPacketAccess) packet).setHeader(this.adventure$tabListHeader);
-    ((ClientboundTabListPacketAccess) packet).setFooter(this.adventure$tabListFooter);
+    final ClientboundTabListPacket packet = new ClientboundTabListPacket(this.adventure$tabListHeader, this.adventure$tabListFooter);
 
     this.connection.send(packet);
   }

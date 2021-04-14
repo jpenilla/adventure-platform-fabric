@@ -23,7 +23,6 @@
  */
 package net.kyori.adventure.platform.fabric.impl;
 
-import ca.stellardrift.colonel.api.ServerArgumentType;
 import io.netty.channel.Channel;
 import java.util.List;
 import java.util.Locale;
@@ -48,8 +47,6 @@ import net.kyori.adventure.translation.GlobalTranslator;
 import net.kyori.adventure.translation.TranslationRegistry;
 import net.kyori.adventure.translation.Translator;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.commands.arguments.ComponentArgument;
-import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.commands.synchronization.ArgumentTypes;
 import net.minecraft.commands.synchronization.EmptyArgumentSerializer;
 import net.minecraft.locale.Language;
@@ -127,6 +124,7 @@ public class AdventureCommon implements ModInitializer {
   public void onInitialize() {
     // Register custom argument types
     if(FabricLoader.getInstance().isModLoaded("colonel")) { // we can do server-only arg types
+      /* TODO: colonel is not updated for 1.17 snapshots
       ServerArgumentType.<ComponentArgumentType>builder(res("component"))
         .type(ComponentArgumentType.class)
         .serializer(new ComponentArgumentTypeSerializer())
@@ -139,6 +137,7 @@ public class AdventureCommon implements ModInitializer {
         .fallbackProvider(arg -> ResourceLocationArgument.id())
         .fallbackSuggestions(null)
         .register();
+       */
     } else {
       ArgumentTypes.register("adventure:component", ComponentArgumentType.class, new ComponentArgumentTypeSerializer());
       ArgumentTypes.register("adventure:key", KeyArgumentType.class, new EmptyArgumentSerializer<>(KeyArgumentType::key));

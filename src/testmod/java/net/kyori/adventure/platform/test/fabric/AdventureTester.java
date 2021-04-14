@@ -305,7 +305,7 @@ public class AdventureTester implements ModInitializer {
    * @param completionAction callback to execute when countdown is complete
    */
   private void beginCountdown(final Component title, final int timeSeconds, final Audience targets, final BossBar.Color color, final Consumer<Audience> completionAction) {
-    final BossBar bar = BossBar.bossBar(title.style(builder -> builder.colorIfAbsent(textColor(color)).font(FONT_IOSEVKA)), 1, color, BossBar.Overlay.PROGRESS, Collections.singleton(BossBar.Flag.PLAY_BOSS_MUSIC));
+    final BossBar bar = BossBar.bossBar(title.style(builder -> builder.colorIfAbsent(textColor(color))/* .font(FONT_IOSEVKA) TODO: this font seems to be broken on 1.17 snapshots */), 1, color, BossBar.Overlay.PROGRESS, Collections.singleton(BossBar.Flag.PLAY_BOSS_MUSIC));
 
     final int timeMs = timeSeconds * 1000; // total time ms
     final long[] times = new long[] {timeMs, System.currentTimeMillis()}; // remaining time in ms, last update time

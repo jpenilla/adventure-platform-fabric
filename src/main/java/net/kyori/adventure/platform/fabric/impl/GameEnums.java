@@ -23,9 +23,12 @@
  */
 package net.kyori.adventure.platform.fabric.impl;
 
+import java.util.Arrays;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.bossbar.BossBar.Overlay;
-import net.kyori.adventure.platform.fabric.impl.accessor.SoundSourceAccess;
 import net.kyori.adventure.sound.Sound;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.BossEvent;
@@ -39,8 +42,10 @@ public final class GameEnums {
     = MappedRegistry.named(BossEvent.BossBarOverlay.class, BossEvent.BossBarOverlay::byName,
     Overlay.class, Overlay.NAMES);
 
+  private static final Map<String, SoundSource> soundSourceMap = Arrays.stream(SoundSource.values()).collect(Collectors.toMap(SoundSource::getName, Function.identity()));
+
   public static final MappedRegistry<SoundSource, Sound.Source> SOUND_SOURCE
-    = MappedRegistry.named(SoundSource.class, key -> SoundSourceAccess.getNameMap().get(key),
+    = MappedRegistry.named(SoundSource.class, soundSourceMap::get,
     Sound.Source.class, Sound.Source.NAMES);
 
   private GameEnums() {

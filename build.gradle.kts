@@ -40,7 +40,7 @@ dependencies {
   include("net.kyori:examination-string:1.1.0")
   modCompileOnly("org.checkerframework:checker-qual:3.10.0")
 
-  modImplementation("ca.stellardrift:colonel:0.2")
+  // modImplementation("ca.stellardrift:colonel:0.2") // TODO: colonel is not updated for 1.17 snapshots
 
   minecraft("com.mojang:minecraft:$versionMinecraft")
   mappings(minecraft.officialMojangMappings())

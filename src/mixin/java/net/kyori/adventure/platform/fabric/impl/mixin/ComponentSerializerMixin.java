@@ -30,6 +30,7 @@ import com.google.gson.JsonSerializationContext;
 import java.lang.reflect.Type;
 
 import net.kyori.adventure.platform.fabric.impl.AdventureCommon;
+import net.kyori.adventure.platform.fabric.impl.NonWrappingComponentSerializer;
 import net.kyori.adventure.platform.fabric.impl.WrappedComponent;
 import net.minecraft.network.chat.Component;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -61,5 +62,6 @@ public abstract class ComponentSerializerMixin {
     locals = LocalCapture.CAPTURE_FAILEXCEPTION, remap = false)
   private static void adventure$injectGson(final CallbackInfoReturnable<Gson> cir, final GsonBuilder gson) {
     AdventureCommon.GSON.populator().apply(gson);
+    NonWrappingComponentSerializer.initializeGsonBuilder(gson);
   }
 }
